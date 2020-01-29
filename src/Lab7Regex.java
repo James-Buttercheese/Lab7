@@ -96,19 +96,10 @@ public class Lab7Regex {
 	public static boolean validateHTML(String html) {
 
 		// change this to pass ALL tests
-		String regex = "<[\\w]*\\>.*\\</[\\w]*>";
+		String regex = "[<][\\w]*\\>.*\\</[\\w]*[>]";
 
-		int subsStart1 = html.indexOf("<");
-		int subsEnd1 = html.indexOf(">");
-		int subsStart2 = html.indexOf("/");
-		int subsEnd2 = html.indexOf(">", subsStart2);
-						
-		String subs1 = html.substring(subsStart1+1, subsEnd1);
-		String subs2 = html.substring(subsStart2+1, subsEnd2);
-
-		if (subs1.equals(subs2)) {
-
-			if (html.matches(regex)) {
+		if (html.matches(regex)) {
+			if (isSame(html)) {
 				System.out.println("HTML is valid!");
 				return true;
 			} else {
@@ -119,6 +110,26 @@ public class Lab7Regex {
 			System.out.println("Sorry, HTML is not valid!");
 			return false;
 		}
+
+	}
+
+	public static boolean isSame(String html) {
+		boolean isSame = false;
+
+		int subsStart1 = html.indexOf("<");
+		int subsEnd1 = html.indexOf(">");
+		int subsStart2 = html.indexOf("/");
+		int subsEnd2 = html.indexOf(">", subsStart2);
+
+		String subs1 = html.substring(subsStart1 + 1, subsEnd1);
+		String subs2 = html.substring(subsStart2 + 1, subsEnd2);
+
+		if (subs1.equals(subs2)) {
+			isSame = true;
+			return isSame;
+		}
+
+		return isSame;
 	}
 
 }
